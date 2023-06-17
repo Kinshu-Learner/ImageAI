@@ -1,10 +1,28 @@
-import React from 'react'
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+
+import preview from '../assets';
+import {getRandomPrompt} from '../utils';
+
+import { FormFiled, Loader } from '../components';
 
 const CreatePost = () => {
+
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    name: '',
+    prompt: '',
+    photo: ''
+  });
+
+  const [generatingImg, setGeneratingImg] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   return (
-    <div>
-      CreatePost
-    </div>
+    <section className='max-w-7xl'>
+      
+    </section>
   )
 }
 
