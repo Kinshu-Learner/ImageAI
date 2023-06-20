@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, FormFiled, Loader } from '../components';
+import { Card, FormField, Loader } from '../components';
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -25,7 +25,7 @@ const Home = () => {
       </div>
 
       <div className="mt-16">
-        <FormFiled />
+        <FormField />
       </div>
 
       <div className="mt-10">

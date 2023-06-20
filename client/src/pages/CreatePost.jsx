@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import preview from '../assets/preview.png';
 import { getRandomPrompt } from '../utils';
 
-import { FormFiled, Loader } from '../components';
+import { FormField, Loader } from '../components';
 
 const CreatePost = () => {
 
@@ -45,7 +45,7 @@ const CreatePost = () => {
 
       <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
-          <FormFiled
+          <FormField
             labelname = 'Your name'
             type = 'text'
             name = 'name'
@@ -53,7 +53,7 @@ const CreatePost = () => {
             value = {form.name}
             handleChange = {handleChange}
           />
-          <FormFiled
+          <FormField
             labelname = 'Prompt'
             type = 'text'
             name = 'prompt'
