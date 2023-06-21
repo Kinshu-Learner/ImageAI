@@ -28,11 +28,12 @@ const CreatePost = () => {
   }
 
   const handleChange = (e) => {
-
+    setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const handleSurpriseMe = () => {
-
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
   }
 
   return (
@@ -46,27 +47,27 @@ const CreatePost = () => {
       <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5">
           <FormField
-            labelname = 'Your name'
-            type = 'text'
-            name = 'name'
-            placeholder = 'King Singh'
-            value = {form.name}
-            handleChange = {handleChange}
+            labelname='Your name'
+            type='text'
+            name='name'
+            placeholder='King Singh'
+            value={form.name}
+            handleChange={handleChange}
           />
           <FormField
-            labelname = 'Prompt'
-            type = 'text'
-            name = 'prompt'
-            placeholder = 'an oil painting by Matisse of a humanoid robot playing chess'
-            value = {form.prompt}
-            handleChange = {handleChange}
+            labelname='Prompt'
+            type='text'
+            name='prompt'
+            placeholder='an oil painting by Matisse of a humanoid robot playing chess'
+            value={form.prompt}
+            handleChange={handleChange}
             isSurpriseMe
-            handleSurpriseMe = {handleSurpriseMe}
+            handleSurpriseMe={handleSurpriseMe}
           />
 
           <div className="relative bg-gray-50 text-gray-900 text-sm rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
             {form.photo ? (
-              <img 
+              <img
                 src={form.photo}
                 alt={form.prompt}
                 className='w-full h-full object-contain'
@@ -82,25 +83,34 @@ const CreatePost = () => {
 
             {generatingImg && (
               <div className="absolute inset-0 z-0 flex justify-center items-center bg-black opacity-50 rounded-lg">
-                <Loader/>
+                <Loader />
               </div>
             )}
-            
+
           </div>
 
         </div>
 
         <div className="mt-5 flex gap-5">
-          <button 
-          type='button'
-          onClick={generateImage}
-          className='text-white bg-green-700 font-medium text-sm rounded-md w-full sm:w-auto px-5 py-2.5 text-center'>
+          <button
+            type='button'
+            onClick={generateImage}
+            className='text-white bg-green-700 font-medium text-sm rounded-md w-full sm:w-auto px-5 py-2.5 text-center'>
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
 
         <div className="mt-10">
+
           <p className='mt-2 text-[#666e75] text-sm'>Once you have created the image you want, you can share it with others in the community</p>
+
+          <button
+            type='submit'
+            className='mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+          >
+            {loading ? "Sharing..." : "Share with the community"}
+          </button>
+
         </div>
 
       </form>
