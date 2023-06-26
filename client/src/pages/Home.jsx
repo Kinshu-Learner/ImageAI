@@ -14,11 +14,14 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
 
-  const [searchText, setsearchText] = useState('')
+  const [searchText, setsearchText] = useState('');
 
-  useEffect(()=>{
+  const [searchedResults, setsearchedResults] = useState(null);
+  const [searchTimeout, setsearchTimeout] = useState(null);
 
-    const fetchPosts = async ()=>{
+  useEffect(() => {
+
+    const fetchPosts = async () => {
 
       setLoading(true);
 
@@ -31,7 +34,7 @@ const Home = () => {
           }
         })
 
-        if(response.ok){
+        if (response.ok) {
           const result = await response.json();
           setAllPosts(result.data.reverse());
         }
@@ -40,7 +43,7 @@ const Home = () => {
         alert(error);
       }
 
-      finally{
+      finally {
         setLoading(false);
       }
 
@@ -49,6 +52,26 @@ const Home = () => {
     fetchPosts();
 
   }, []);
+
+  const handleSearchChange = (e) => {
+
+    clearTimeout(searchTimeout);
+
+    setsearchText(e.target.value);
+
+    setsearchTimeout(
+
+      setTimeout(() => {
+
+        const searchResults = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
+
+        setsearchedResults(searchResults);
+
+      }, 500)
+
+    );
+
+  };
 
   return (
     <section className='max-w-7xl mx-auto'>
@@ -59,7 +82,14 @@ const Home = () => {
       </div>
 
       <div className="mt-16">
-        <FormField />
+        <FormField 
+          labelname="Search Posts"
+          type="text"
+          name="text"
+          placeholder="Search Posts"
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
 
       <div className="mt-10">
@@ -77,7 +107,7 @@ const Home = () => {
             <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-3">
               {searchText ? (
                 <RenderCards
-                  data={[]}
+                  data={searchedResults}
                   title="No search results found" />)
                 : (<RenderCards
                   data={allPosts}
