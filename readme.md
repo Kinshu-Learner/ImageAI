@@ -30,3 +30,7 @@ Once the user is happy with the generated image, they can click on the `Share wi
 **This will redirect the user back to the Home Page, and the new image can also be viewed in the Community Showcase.**
 
 ![Updated Showcase](https://raw.githubusercontent.com/Kinshu-Learner/ImageAI/master/Screenshots/Updated%20Showcase%201.png)
+
+## License
+
+ImageAI is released under the [MIT License](LICENSE), granting you the freedom to use, modify, and distribute the software.
